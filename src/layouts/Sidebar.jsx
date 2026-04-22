@@ -1,9 +1,9 @@
-import { LuLayoutDashboard, LuListOrdered, LuUsers, LuPlus } from "react-icons/lu";
+import { LuLayoutDashboard, LuListOrdered, LuUsers, LuPlus, LuInfo, LuLock, LuShield } from "react-icons/lu";
 import { Link, NavLink } from "react-router-dom";
 
 export default function Sidebar() {
-       const menuClass = ({ isActive }) =>
-        `flex cursor-pointer items-center rounded-xl p-4  space-x-2
+    const menuClass = ({ isActive }) =>
+        `flex cursor-pointer items-center rounded-xl p-4 space-x-2
         ${isActive ? 
             "text-hijau bg-green-200 font-extrabold" : 
             "text-gray-600 hover:text-hijau hover:bg-green-200 hover:font-extrabold"
@@ -20,7 +20,7 @@ export default function Sidebar() {
             </div>
 
             {/* List Menu */}
-            <div id="sidebar-menu" className="mt-10">
+            <div id="sidebar-menu" className="mt-10 overflow-y-auto">
                 <ul id="menu-list" className="space-y-3">
                     <li>
                         <NavLink id="menu-1" to="/" className={menuClass}>
@@ -28,13 +28,33 @@ export default function Sidebar() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink id="menu-2" to="/Orders" className={menuClass}>
+                        <NavLink id="menu-2" to="/orders" className={menuClass}>
                             <LuListOrdered className="mr-4 text-xl" /> Orders
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink id="menu-3" to="/Customers" className={menuClass}>
+                        <NavLink id="menu-3" to="/customers" className={menuClass}>
                             <LuUsers className="mr-4 text-xl" /> Customers
+                        </NavLink>
+                    </li>
+
+                    {/* LATIHAN: Menu tambahan untuk Error Pages */}
+                    <div className="pt-4 pb-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                        Error Pages (Latihan)
+                    </div>
+                    <li>
+                        <NavLink to="/error-400" className={menuClass}>
+                            <LuInfo className="mr-4 text-xl" /> Error 400
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/error-401" className={menuClass}>
+                            <LuLock className="mr-4 text-xl" /> Error 401
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/error-403" className={menuClass}>
+                            <LuShield className="mr-4 text-xl" /> Error 403
                         </NavLink>
                     </li>
                 </ul>
@@ -50,7 +70,7 @@ export default function Sidebar() {
                 </div>
             </div>
 
-            {/* 3. FOOTER SECTION (Kembali utuh seperti aslinya + sedikit perbaikan posisi) */}
+            {/* FOOTER SECTION */}
             <div id="sidebar-footer" className="mt-auto">
                 <div id="footer-card" className="bg-hijau px-4 py-6 rounded-3xl shadow-lg mb-10 flex items-center relative overflow-hidden">
                     <div id="footer-text" className="text-white text-sm z-10 w-2/3">
@@ -61,7 +81,6 @@ export default function Sidebar() {
                             </span>
                         </div>
                     </div>
-                    {/* Foto Profil disesuaikan posisinya agar rapi */}
                     <img 
                         className="w-16 h-16 rounded-full object-cover border-2 border-white/50 ml-auto shadow-md" 
                         src="/img/foto.png" 
