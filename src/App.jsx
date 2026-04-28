@@ -1,32 +1,41 @@
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import React from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./assets/tailwind.css";
-import Sidebar from "./layouts/Sidebar";
-import Header from "./layouts/Header";
-import Dashboard from "./pages/Dashboard";
+// import Dashboard from "./pages/Dashboard";
 import { Route, Routes } from "react-router-dom";
-import Orders from "./pages/Orders";
-import Customers from "./pages/Customers";
-import ErrorPage from "./pages/ErrorPage"; // Import komponen ErrorPage
+import Loading from "./pertemuan-5/components/Loading";
+// import Orders from "./pages/Orders";
+// import Customers from "./pages/Customers";
+// import ErrorPage from "./pages/ErrorPage"; // Import komponen ErrorPage
+// import MainLayout from "./layouts/MainLayout";
+// import AuthLayout from "./layouts/AuthLayout";
+// import Login from "./pages/auth/Login";
+// import Register from "./pages/auth/Register";
+// import Forgot from "./pages/auth/Forgot";
+
+const Dashboard = React.lazy(() => import("./pages/Dashboard"))
+const Orders = React.lazy(() => import("./pages/Orders"))
+const Customers = React.lazy(() => import("./pages/Customers"))
+const ErrorPage = React.lazy(() => import("./pages/ErrorPage"))
+const MainLayout = React.lazy(() => import("./layouts/MainLayout"))
+const AuthLayout = React.lazy(() => import("./layouts/AuthLayout"))
+const Login = React.lazy(() => import("./pages/auth/Login"))
+const Register = React.lazy(() => import("./pages/auth/Register"))
+const Forgot = React.lazy(() => import("./pages/auth/Forgot"))
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    // Struktur wrapper utama dashboard
-    <div id="app-container" className="bg-gray-100 min-h-screen flex">
-      <div id="layout-wrapper" className="flex flex-row flex-1">
-        {/* Sidebar di sebelah kiri */}
-        <Sidebar />
-
-        {/* Konten utama di sebelah kanan */}
-        <div id="main-content" className="flex-1 p-4 overflow-y-auto">
-          <Header />
+    <Suspense fallback={<Loading />}>
           <Routes>
+            <Route element={<MainLayout/>}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/customers" element={<Customers />} />
+          
             
             {/* Rute tambahan untuk latihan Error Pages dengan gambar berbeda-beda */}
             <Route 
@@ -44,10 +53,14 @@ function App() {
 
             {/* Rute Not Found (404) diletakkan paling bawah */}
             <Route path="*" element={<ErrorPage code="404" description="Page Not Found" image="https://illustrations.popsy.co/white/navigation.svg" />} />
-          </Routes>
-        </div>
-      </div>
-    </div>
+          </Route>
+           <Route element={<AuthLayout/>}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register/>} />
+            <Route path="/forgot" element={<Forgot/>} />
+        </Route>
+            </Routes>
+            </Suspense>
   );
 }
 
