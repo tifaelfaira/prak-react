@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
-import products from "../data/products.json";
+import products from "../data/Products.json";
 
 export default function Products() {
   return (
