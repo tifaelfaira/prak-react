@@ -1,4 +1,4 @@
-import { LuLayoutDashboard, LuListOrdered, LuUsers, LuPlus, LuInfo, LuLock, LuShield } from "react-icons/lu";
+import { LuLayoutDashboard, LuListOrdered, LuUsers, LuPlus, LuInfo, LuLock, LuShield, LuPackage } from "react-icons/lu";
 import { Link, NavLink } from "react-router-dom";
 
 export default function Sidebar() {
@@ -35,6 +35,13 @@ export default function Sidebar() {
                     <li>
                         <NavLink id="menu-3" to="/customers" className={menuClass}>
                             <LuUsers className="mr-4 text-xl" /> Customers
+                        </NavLink>
+                    </li>
+
+                    {/* MENU PRODUCTS (Sekarang di bawah Customers sesuai request) */}
+                    <li>
+                        <NavLink id="menu-products" to="/products" className={menuClass}>
+                            <LuPackage className="mr-4 text-xl" /> Products
                         </NavLink>
                     </li>
 
